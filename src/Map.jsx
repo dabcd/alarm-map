@@ -4,13 +4,22 @@ import { pathsHelper } from "./assets/paths-helper";
 import Tooltip from "./Tooltip";
 
 export default function Map({ data }) {
-  const [pathName, setPathName] = useState(null);
+  const [selectedPath, setSelectedPath] = useState(null);
   // console.log(data);
   function getPath(name) {
-    setPathName(name);
+    setSelectedPath(name);
   }
   const pathsGenerator = pathsHelper.map((elem) => {
-    let cssClass = data.states[elem.name].enabled ? "alert" : "quiet";
+    const oblast = data.states[elem.name];
+    let cssClass = "";
+    cssClass = oblast.enabled ? "alert" : "quiet";
+    if (cssClass === "quiet") {
+      Object.keys(oblast.districts).forEach((key) => {
+        if (oblast.districts[key].enabled) {
+          cssClass = "partial";
+        }
+      });
+    }
     return (
       <path
         d={paths[elem.pathName]}
@@ -39,7 +48,7 @@ export default function Map({ data }) {
       >
         {pathsGenerator}
       </svg>
-      <Tooltip pathName={pathName} data={data} />
+      <Tooltip pathName={selectedPath} data={data} />
     </div>
   );
 }

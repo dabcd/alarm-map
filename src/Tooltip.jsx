@@ -19,7 +19,8 @@ export default function Tooltip(props) {
   }
   return (
     <div className={props.pathName ? "Tooltip border" : "Tooltip"}>
-      <h2>{areaData ? (areaData.enabled ? "🔴" : "🟢") : ""} {props.pathName}</h2>
+      {/* <h2>{areaData ? (areaData.enabled ? "🔴" : "🟢") : ""} {props.pathName}</h2> */}
+      <h2>{props.pathName}</h2>
       <div className="text">
         {region}
       </div>

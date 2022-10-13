@@ -20,8 +20,8 @@ body {
 }
 
 svg {
-  max-height: 400px;
-  width: auto;
+  height: auto;
+  width: 100%;
 }
 
 .quiet {
@@ -32,24 +32,26 @@ svg {
   fill: red;
 }
 
+.partial {
+  fill: orange;
+}
+
 .quiet:hover,
-.alert:hover {
+.alert:hover,
+.partial:hover {
   opacity: 80%;
   cursor: pointer;
 }
 
 .Map {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: 0.7fr 0.3fr;
   gap: 20px;
 }
 
 .Tooltip {
-  position: relative;
-  top: 30px;
-  height: 100%;
-  padding: 5px;
+  height: fit-content;
+  padding: 10px;
 }
 
 .Tooltip.border {
@@ -77,6 +79,7 @@ svg {
     position: static;
   }
   .Map {
+    display: flex;
     flex-direction: column;
     align-items: center;
   }
