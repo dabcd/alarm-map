@@ -11,14 +11,19 @@ export default function Map({ data }) {
   }
   const pathsGenerator = pathsHelper.map((elem) => {
     const oblast = data.states[elem.name];
-    let cssClass = "";
-    cssClass = oblast.enabled ? "alert" : "quiet";
+    let cssClass = oblast.enabled ? "alert" : "quiet";
     if (cssClass === "quiet") {
-      Object.keys(oblast.districts).forEach((key) => {
-        if (oblast.districts[key].enabled) {
-          cssClass = "partial";
-        }
-      });
+      // Object.keys(oblast.districts).forEach((key) => {
+      //   if (oblast.districts[key].enabled) {
+      //     cssClass = "partial";
+      //   }
+      // });
+      if (
+        Object.keys(oblast.districts).findIndex(
+          (key) => oblast.districts[key].enabled
+        ) !== -1) {
+        cssClass = "partial";
+      }
     }
     return (
       <path
